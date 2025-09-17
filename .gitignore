@@ -1,0 +1,48 @@
+# Compiled binaries
+*.exe
+*.out
+*.app
+a.out
+
+# Object files
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+
+# Static libraries
+*.a
+*.lib
+
+# Debug files
+*.dSYM/
+*.pdb
+
+# Build directories
+build/
+bin/
+obj/
+out/
+
+# IDE files
+.vscode/
+.vs/
+*.vcxproj*
+*.sln
+*.suo
+*.user
+
+# CMake generated files (but keep hand-written Makefiles)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Core dumps
+core
