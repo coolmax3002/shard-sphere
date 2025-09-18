@@ -1,8 +1,10 @@
-#include "server.h"
+#include "server.hpp"
+#include "RequestHandler.hpp"
 #include <iostream>
 
 int main (int argc, char *argv[]) {
-  Server server (8080);
+  RequestHandler handler;
+  Server server (8085, handler);
   if (server.start() == -1) {
     std::cout << "Failed to start server" << std::endl;
     return 1;

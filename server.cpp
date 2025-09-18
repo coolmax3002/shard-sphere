@@ -1,5 +1,6 @@
-#include "server.h"
-#include "HttpParser.h"
+#include "server.hpp"
+#include "HttpParser.hpp"
+#include "RequestHandler.hpp"
 #include <cstddef>
 #include <cstdio>
 #include <iostream>
@@ -8,8 +9,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <cstddef>
 
-Server::Server(int port) : port(port), server_fd(-1) {
+Server::Server(int port, RequestHandler handler) : port(port), server_fd(-1), handler(handler) {
     memset(&address, 0, sizeof(address));
 }
 
@@ -87,8 +89,9 @@ void Server::run() {
         
 
         if (result == HttpParser::PARSE_COMPLETE) {
-          const char* response = "HTTP/1.1 200 OK\r\n\r\n";
-          send(incoming_socket, response, strlen(response), 0);
+          HttpResponse response = handler.processRequest(parser.request);
+          std::string response_string = response.toString();
+          send(incoming_socket, response_string.c_str(), response_string.length(), 0);
           close(incoming_socket);
           std::cout << parser.request << std::endl;
           //handle request

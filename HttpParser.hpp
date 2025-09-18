@@ -4,6 +4,7 @@
 #include <ostream>
 #include <string>
 #include <unordered_map>
+#include <cstddef>
 
 struct HttpRequest {
   bool valid = false;
@@ -37,6 +38,22 @@ struct HttpRequest {
     os << "  Body: " << req.body << "\n";
     os << "}";
     return os;
+  }
+};
+
+struct HttpResponse {
+  std::string status_code;
+  std::string body;
+  HttpResponse(
+      std::string status_code,
+      std::string body
+      ) : status_code(status_code), body(body) {};
+
+  std::string toString() const {
+    return "HTTP/1.1 " + status_code + "\r\n"
+           "Content-Type: application/json\r\n"
+           "Content-Length: " + std::to_string(body.length()) + "\r\n"
+           "\r\n" + body;
   }
 };
 

@@ -1,7 +1,8 @@
-#include "HttpParser.h"
+#include "HttpParser.hpp"
 #include <string>
 #include <vector>
 #include <sstream>
+#include <cstddef>
 
 HttpParser::PARSE_RESULT HttpParser::feed(const char* data, size_t len) {
   buffer.append(data, len);

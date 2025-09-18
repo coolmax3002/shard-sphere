@@ -28,6 +28,7 @@ out/
 # IDE files
 .vscode/
 .vs/
+.clangd
 *.vcxproj*
 *.sln
 *.suo
