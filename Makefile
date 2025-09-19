@@ -6,13 +6,13 @@ CXXFLAGS = -Wall -std=c++17
 TARGET = server
 
 # Source files
-SRCS = main.cpp server.cpp HttpParser.cpp RequestHandler.cpp
+SRCS = main.cpp server.cpp HttpParser.cpp RequestHandler.cpp KeyValueStore.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
 # Header files
-DEPS = server.hpp HttpParser.hpp RequestHandler.hpp
+DEPS = server.hpp HttpParser.hpp RequestHandler.hpp KeyValueStore.cpp
 
 # Default rule
 all: $(TARGET)

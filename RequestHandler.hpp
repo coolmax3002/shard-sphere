@@ -2,6 +2,7 @@
 #define REQUEST_HANDLER_H
 
 #include "HttpParser.hpp"
+#include "KeyValueStore.hpp"
 #include <regex>
 #include <string>
 #include <unordered_set>
@@ -17,9 +18,14 @@ struct Route {
 class RequestHandler {
   private:
     std::vector<Route> routes;
+    KeyValueStore kvs;
 
   public:
-    RequestHandler() {
+    RequestHandler() : kvs() {
+      registerRoutes();
+    }
+
+    RequestHandler(const KeyValueStore& existing_kvs) : kvs(existing_kvs) {
       registerRoutes();
     }
 
@@ -30,6 +36,7 @@ class RequestHandler {
     HttpResponse handlePing(const HttpRequest& request, const std::smatch matches);
     HttpResponse handlePingName(const HttpRequest& request, const std::smatch matches);
     HttpResponse handleEcho(const HttpRequest& request, const std::smatch matches);
+    HttpResponse handleKvs(const HttpRequest& request, const std::smatch matches);
 };
 
 #endif //REQUEST_HANDLER_H 
